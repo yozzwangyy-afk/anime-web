@@ -1,13 +1,17 @@
 // components/Layout.js
+import Link from 'next/link'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 export default function Layout({ children }) {
   const [searchQuery, setSearchQuery] = useState('')
+  const router = useRouter()
 
   const handleSearch = (e) => {
     e.preventDefault()
-    // Implement search functionality
-    console.log('Search:', searchQuery)
+    if (searchQuery.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`)
+    }
   }
 
   return (
@@ -15,8 +19,10 @@ export default function Layout({ children }) {
       <header className="header">
         <div className="container">
           <nav className="nav">
-            <div className="logo">AnimePink</div>
-            <form onSubmit={handleSearch}>
+            <Link href="/" className="logo">
+              🎌 AnimePink
+            </Link>
+            <form onSubmit={handleSearch} className="search-container">
               <input
                 type="text"
                 className="search-bar"
@@ -24,6 +30,9 @@ export default function Layout({ children }) {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
+              <button type="submit" className="search-btn">
+                🔍
+              </button>
             </form>
           </nav>
         </div>
