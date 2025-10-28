@@ -20,7 +20,7 @@ export default function Layout({ children }) {
         <div className="container">
           <nav className="nav">
             <Link href="/" className="logo">
-              🎌 AnimePink
+              🎌 AnimeID
             </Link>
             <form onSubmit={handleSearch} className="search-container">
               <input
