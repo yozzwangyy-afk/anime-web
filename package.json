@@ -1,7 +1,7 @@
 {
   "name": "anime-website",
   "version": "1.0.0",
-  "description": "Website anime dengan Next.js",
+  "description": "Website anime modern dengan Next.js",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -16,7 +16,12 @@
     "react-dom": "18.2.0",
     "axios": "^1.5.0"
   },
-  "keywords": ["anime", "nextjs", "react"],
+  "keywords": [
+    "anime",
+    "nextjs",
+    "react",
+    "jikan-api"
+  ],
   "author": "Yoxz",
   "license": "MIT"
 }
