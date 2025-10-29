@@ -17,7 +17,8 @@ export const authOptions = {
           name: profile.name || profile.login,
           email: profile.email,
           image: profile.avatar_url,
-          role: "user", // Default role
+          role: "user",
+          username: profile.login, // Tambahkan username
         };
       }
     }),
@@ -30,7 +31,8 @@ export const authOptions = {
           name: profile.name,
           email: profile.email,
           image: profile.picture,
-          role: "user", // Default role
+          role: "user",
+          emailVerified: new Date(), // Mark email as verified for OAuth
         };
       }
     }),
@@ -38,8 +40,9 @@ export const authOptions = {
 
   pages: {
     signIn: "/signin",
-    signUp: "/signup",
+    signOut: "/",
     error: "/auth/error",
+    verifyRequest: "/auth/verify-request",
   },
 
   secret: process.env.NEXTAUTH_SECRET,
@@ -53,10 +56,24 @@ export const authOptions = {
   callbacks: {
     async session({ session, user }) {
       // Send properties to the client
-      session.user.id = user.id;
-      session.user.role = user.role;
-      
+      if (session.user) {
+        session.user.id = user.id;
+        session.user.role = user.role;
+        session.user.username = user.username;
+        session.user.emailVerified = user.emailVerified;
+      }
       return session;
+    },
+    
+    async jwt({ token, user, account }) {
+      // Persist OAuth access_token to token
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      if (user) {
+        token.role = user.role;
+      }
+      return token;
     },
     
     async signIn({ user, account, profile }) {
@@ -64,28 +81,66 @@ export const authOptions = {
       if (account?.provider === "google" || account?.provider === "github") {
         return true;
       }
+      
+      // You can add additional sign-in logic here
+      // For example, restrict certain email domains
       return true;
     },
     
     async redirect({ url, baseUrl }) {
-      // Redirect to home page after sign in
-      if (url.startsWith(baseUrl)) return url;
-      // Allow relative callback URLs
-      if (url.startsWith("/")) return new URL(url, baseUrl).toString();
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url;
       return baseUrl;
     }
   },
 
   events: {
     async createUser({ user }) {
-      // Optional: Add custom logic when a new user is created
-      console.log(`New user created: ${user.email}`);
+      // Custom logic when a new user is created
+      console.log(`🎉 New user created: ${user.email}`);
+      
+      // You can add welcome email logic here
+      // await sendWelcomeEmail(user.email, user.name);
+    },
+    
+    async linkAccount({ user, account, profile }) {
+      console.log(`🔗 Account linked for user: ${user.email}`);
     },
     
     async signIn({ user, account, isNewUser }) {
       if (isNewUser) {
-        console.log(`New user signed in for the first time: ${user.email}`);
+        console.log(`👋 New user signed in for the first time: ${user.email}`);
+      } else {
+        console.log(`✅ User signed in: ${user.email}`);
       }
+    }
+  },
+
+  // Enhanced security options
+  cookies: {
+    sessionToken: {
+      name: `next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: process.env.NODE_ENV === 'production'
+      }
+    }
+  },
+
+  // Better error handling
+  logger: {
+    error(code, metadata) {
+      console.error(`🔴 NextAuth Error [${code}]:`, metadata);
+    },
+    warn(code) {
+      console.warn(`🟡 NextAuth Warning [${code}]`);
+    },
+    debug(code, metadata) {
+      console.log(`🔵 NextAuth Debug [${code}]:`, metadata);
     }
   },
 
