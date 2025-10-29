@@ -24,7 +24,6 @@ const Home = async () => {
       <div className="min-h-screen">
         <HeroSection />
         
-        {/* Anime Ongoing Section */}
         <section className="py-12">
           <Header 
             title="Anime Sedang Tayang" 
@@ -34,7 +33,6 @@ const Home = async () => {
           <AnimeOngoing api={animeOngoing}/>
         </section>
 
-        {/* Anime Completed Section */}
         <section className="py-12 bg-pink-950/20">
           <Header 
             title="Anime Selesai" 
