@@ -1,17 +1,18 @@
-import React from 'react'
-import SearchInput from './SearchInput'
-import Link from 'next/link'
-import Image from 'next/image'
-import UserActionButton from './UserActionButton'
+'use client';
 
-const HeroSection = async () => {
+import React from 'react';
+import SearchInput from './SearchInput';
+import Link from 'next/link';
+import Image from 'next/image';
+import UserActionButton from './UserActionButton';
+
+const HeroSection = () => {
   return (
     <div className="flex items-center justify-center pt-16 px-4 py-8">
       <div className="w-full max-w-6xl glass-effect lg:h-[500px] rounded-2xl overflow-hidden 
     grid grid-cols-1 lg:grid-cols-2 pink-glow
     shadow-2xl shadow-pink-500/10 border border-pink-500/20">
 
-        {/* Konten Teks */}
         <div className="p-6 lg:p-12 flex flex-col justify-center relative 
       bg-gradient-to-br from-pink-900/20 to-purple-900/20 
       order-2 lg:order-1">
@@ -49,7 +50,6 @@ const HeroSection = async () => {
           <UserActionButton />
         </div>
 
-        {/* Gambar */}
         <div className="relative h-[300px] lg:h-auto order-1 lg:order-2">
           <div className="absolute inset-0 bg-gradient-to-r from-pink-900/20 to-transparent z-10"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-pink-900/20 to-transparent z-10"></div>
@@ -61,7 +61,6 @@ const HeroSection = async () => {
             className="absolute inset-0 w-full h-full object-cover"
             priority={true}
           />
-          {/* Floating Elements */}
           <div className="absolute top-4 right-4 z-20 bg-pink-500/20 backdrop-blur-sm rounded-full p-3 border border-pink-500/30">
             <span className="text-white text-sm">🔥 Trending</span>
           </div>
@@ -71,7 +70,7 @@ const HeroSection = async () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default HeroSection
+export default HeroSection;
