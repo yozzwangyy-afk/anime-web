@@ -2,14 +2,17 @@ import React from 'react';
 import AnimeListClient from '../components/AnimeListClient';
 import Navigation from '../components/Navigation';
 
-// Server Component
-const Page = async () => {
+// Tambahkan ini untuk force dynamic rendering
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
+const Page = async () => {
     async function getAllAnime() {
         try {
             const apiUrl = process.env.NEXT_PUBLIC_API_URL;
             const response = await fetch(`${apiUrl}/unlimited`, { 
-                cache: 'no-store'
+                // HAPUS no-store, ganti dengan revalidate
+                next: { revalidate: 3600 } // Cache 1 jam
             }); 
             
             if (!response.ok) {
@@ -38,7 +41,6 @@ const Page = async () => {
         <div className="min-h-screen bg-gradient-to-br from-pink-950/50 via-purple-900/50 to-pink-900/50 text-white p-4 md:p-8">
             <Navigation />
             
-            {/* Header Section */}
             <div className="text-center mb-12 mt-8">
                 <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
                     Daftar Semua Anime
@@ -49,7 +51,6 @@ const Page = async () => {
                 <div className="w-32 h-1 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto mt-4 rounded-full"></div>
             </div>
 
-            {/* Info Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
                 <div className="glass-effect rounded-2xl p-6 text-center pink-glow">
                     <div className="text-3xl font-bold text-pink-300 mb-2">
@@ -71,12 +72,10 @@ const Page = async () => {
                 </div>
             </div>
 
-            {/* Anime List */}
             <div className="glass-effect rounded-2xl p-6 pink-glow max-w-6xl mx-auto">
                 <AnimeListClient initialData={flattenedAnimeList} />
             </div>
 
-            {/* Footer Note */}
             <div className="text-center mt-12 text-pink-200">
                 <p className="text-sm">
                     ❤️ Nikmati streaming anime berkualitas dengan subtitle Indonesia
