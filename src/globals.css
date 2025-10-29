@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0f;
-  --foreground: #f0f0f0;
-  --primary: #6366f1;
-  --primary-dark: #4f46e5;
-  --secondary: #ec4899;
-  --accent: #8b5cf6;
-  --card-bg: #1a1a2e;
-  --card-hover: #252542;
+  --background: #0f0f1a;
+  --foreground: #fdf2f8;
+  --primary: #f472b6;
+  --primary-dark: #ec4899;
+  --secondary: #f9a8d4;
+  --accent: #fbcfe8;
+  --card-bg: #1f1f2e;
+  --card-hover: #2a2a3c;
 }
 
 @theme inline {
@@ -23,8 +23,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0f;
-    --foreground: #f0f0f0;
+    --background: #0f0f1a;
+    --foreground: #fdf2f8;
   }
 }
 
@@ -53,19 +53,19 @@ body {
   background: var(--primary-dark);
 }
 
-/* Gradient Text */
+/* Gradient Text - Soft Pink */
 .gradient-text {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: linear-gradient(135deg, #f9a8d4, #fdf2f8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Glass Morphism */
+/* Glass Morphism dengan tema pink */
 .glass-effect {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(249, 168, 212, 0.05);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(249, 168, 212, 0.1);
 }
 
 /* Hover Animations */
@@ -75,5 +75,14 @@ body {
 
 .hover-lift:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 25px rgba(244, 114, 182, 0.2);
+}
+
+/* Pink Glow Effect */
+.pink-glow {
+  box-shadow: 0 0 20px rgba(244, 114, 182, 0.3);
+}
+
+.pink-glow:hover {
+  box-shadow: 0 0 30px rgba(244, 114, 182, 0.5);
 }
