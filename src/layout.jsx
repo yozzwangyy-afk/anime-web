@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 min-h-screen`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-pink-950/50 via-purple-900/50 to-pink-900/50 min-h-screen`}>
         <NextAuthProvider>
           <Navigation />
           <main className="min-h-screen">
