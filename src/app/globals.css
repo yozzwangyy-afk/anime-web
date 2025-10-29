@@ -53,7 +53,7 @@ body {
   background: var(--primary-dark);
 }
 
-/* Gradient Text - Soft Pink */
+/* Gradient Text */
 .gradient-text {
   background: linear-gradient(135deg, #f9a8d4, #fdf2f8);
   -webkit-background-clip: text;
@@ -61,7 +61,7 @@ body {
   background-clip: text;
 }
 
-/* Glass Morphism dengan tema pink */
+/* Glass Morphism */
 .glass-effect {
   background: rgba(249, 168, 212, 0.05);
   backdrop-filter: blur(10px);
