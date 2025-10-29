@@ -3,13 +3,17 @@ import AnimeOngoing from "@/app/components/AnimeOngoing";
 import Header from "@/app/components/Header";
 import HeroSection from "@/app/components/HeroSection";
 
+// Tambahkan ini untuk force dynamic rendering
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 const Home = async () => {
   try {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     
     const response = await fetch(`${apiUrl}/home`, {
-      next: { revalidate: 300 },
-      signal: AbortSignal.timeout(10000)
+      // HAPUS no-store, ganti dengan revalidate
+      next: { revalidate: 1800 } // Cache 30 menit
     });
     
     if (!response.ok) {
